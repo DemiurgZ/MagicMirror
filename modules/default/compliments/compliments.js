@@ -124,9 +124,11 @@ Module.register("compliments", {
 	 * Retrieve a file from the local filesystem
 	 */
 	complimentFile: function(callback) {
-		var xobj = new XMLHttpRequest();
+		var xobj = new XMLHttpRequest(),
+			isRemote = this.config.remoteFile.indexOf("http://") === 0 || this.config.remoteFile.indexOf("https://") === 0,
+			path = isRemote ? this.config.remoteFile : this.file(this.config.remoteFile);
 		xobj.overrideMimeType("application/json");
-		xobj.open("GET", this.file(this.config.remoteFile), true);
+		xobj.open("GET", path, true);
 		xobj.onreadystatechange = function() {
 			if (xobj.readyState == 4 && xobj.status == "200") {
 				callback(xobj.responseText);
@@ -153,7 +155,7 @@ Module.register("compliments", {
 
 		var compliment = document.createTextNode(complimentText);
 		var wrapper = document.createElement("div");
-		wrapper.className = this.config.classes ? this.config.classes : "thin xlarge bright";
+		wrapper.className = this.config.classes ? this.config.classes : "thin xlarge bright pre-line";
 		wrapper.appendChild(compliment);
 
 		return wrapper;
