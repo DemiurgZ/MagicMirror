@@ -37,7 +37,7 @@ Module.register("updatenotification", {
 	diffLink: function(text) {
 		var localRef = this.status.hash;
 		var remoteRef = this.status.tracking.replace(/.*\//, "");
-		return "<a href=\"https://github.com/MichMich/MagicMirror/compare/"+localRef+"..."+remoteRef+"\" "+
+		return "<a href=\"https://github.com/DemiurgZ/MagicMirror/compare/"+localRef+"..."+remoteRef+"\" "+
 			"class=\"xsmall dimmed\" "+
 			"style=\"text-decoration: none;\" "+
 			"target=\"_blank\" >" +
